@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   // find all categories
   Category.findAll({
     include:{
-      model:"Product",
+      model: Product,
       attributes: ['product_name']
     }
   }).then(
@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
       id: req.params.id
     },
     include:{
-      model:"Product",
+      model: Product,
       attributes:['category_id']
     }
   }).then(
@@ -66,7 +66,7 @@ router.put('/:id', (req, res) => {
     })
     .then(data => {
       if (!data) {
-        res.status(404).json({ message: 'Category can not be found.' });
+        res.status(404).json({ message: 'Category can not found.' });
         return;
       }
       res.json(data);
@@ -88,12 +88,12 @@ router.delete('/:id', (req, res) => {
         id: req.params.id
       }
     })
-    .then(data => {
-      if (!data) {
+    .then(categoryData => {
+      if (!categoryData) {
         res.status(404).json({ message: 'Category can not be found.' });
         return;
       }
-      res.json(data);
+      res.json(categoryData);
     })
     .catch(err => {
       console.log(err);
